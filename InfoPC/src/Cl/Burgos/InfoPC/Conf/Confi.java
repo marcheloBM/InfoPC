@@ -13,8 +13,8 @@ public interface Confi {
     static String nameArchivo = "ApliInfoPC.zip";
     static String CarpetaUpdate = "Update/";
     static String Version = "1.0";
-    static String UrlVersion = "https://raw.githubusercontent.com/marchelo1989/InfoPC/main/Archivos/Version.txt";
-    static String UrlDescarga = "https://raw.githubusercontent.com/marchelo1989/InfoPC/main/Archivos/Descarga.txt";
+    static String UrlVersion = "https://raw.githubusercontent.com/marcheloBM/InfoPC/Marchelo/Archivos/Version.txt";
+    static String UrlDescarga = "https://raw.githubusercontent.com/marcheloBM/InfoPC/Marchelo/Archivos/Descarga.txt";
     
      //Configuracion de Log
     String nameLog="LogGeneral.log";
