@@ -1,0 +1,2 @@
+InfoPC 			JAVA APP
+ConsoleInfo		C# CMD

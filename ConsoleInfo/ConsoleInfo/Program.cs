@@ -13,11 +13,20 @@ modelo = Regex.Replace(modelo, @"\s*$", "");
 Console.WriteLine(modelo);
 
 string numSerie = EjecutarComandoWMIC("/c wmic bios get serialnumber");
-numSerie = Regex.Replace(numSerie, @"\s*$", "");
-Console.WriteLine(numSerie);
 string numSerie2 = EjecutarComandoWMIC("/c wmic path win32_computersystemproduct get uuid");
+numSerie = Regex.Replace(numSerie, @"\s*$", "");
 numSerie2 = Regex.Replace(numSerie2, @"\s*$", "");
-Console.WriteLine(numSerie2);
+string reps = numSerie;
+if (reps.Equals("To be filled by O.E.M."))
+{
+    Console.WriteLine(numSerie);
+}
+else
+{
+    Console.WriteLine(numSerie2);
+}   
+//Console.WriteLine(numSerie);
+//Console.WriteLine(numSerie2);
 
 string fechaInsta = EjecutarComandoWMIC("/c wmic os get installdate");
 //fechaInsta = Regex.Replace(fechaInsta, @"\s*$", "");
