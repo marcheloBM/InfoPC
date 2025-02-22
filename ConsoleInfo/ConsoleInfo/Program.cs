@@ -1,11 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.Text.RegularExpressions;
-
-using System.Diagnostics;
-using System.Globalization;
-using System.Text.RegularExpressions;
 
 string marca = EjecutarComandoWMIC("/c wmic computersystem get name");
 marca = ExtraerValorLimpio(marca);
@@ -23,14 +17,18 @@ string uuid = EjecutarComandoWMIC("/c wmic path win32_computersystemproduct get 
 uuid = ExtraerValorLimpio(uuid);
 Console.WriteLine("UUID: " + uuid);
 
-string fechaInsta = EjecutarComandoWMIC("/c wmic os get installdate");
-string installDate = ExtractInstallDate(fechaInsta);
-DateTime fechaConvertida = DateTime.ParseExact(installDate.Substring(0, 14), "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
-Console.WriteLine("Fecha de Instalación: " + fechaConvertida.ToString("yyyy-MM-dd HH:mm:ss"));
+string sistemaOperativo = EjecutarComandoWMIC("/c wmic os get Caption");
+sistemaOperativo = ExtraerValorLimpio(sistemaOperativo);
+Console.WriteLine("Sistema Operativo: " + sistemaOperativo);
 
 string arqui = EjecutarComandoWMIC("/c wmic os get osarchitecture");
 arqui = ExtraerValorLimpio(arqui);
 Console.WriteLine("Arquitectura del SO: " + arqui);
+
+string fechaInsta = EjecutarComandoWMIC("/c wmic os get installdate");
+string installDate = ExtractInstallDate(fechaInsta);
+DateTime fechaConvertida = DateTime.ParseExact(installDate.Substring(0, 14), "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
+Console.WriteLine("Fecha de Instalación: " + fechaConvertida.ToString("yyyy-MM-dd HH:mm:ss"));
 
 Console.WriteLine("Presiona Enter para salir...");
 Console.ReadLine();
@@ -56,7 +54,7 @@ static string ExtraerValorLimpio(string wmicOutput)
     string[] lines = wmicOutput.Split('\n');
     foreach (var line in lines)
     {
-        if (!string.IsNullOrWhiteSpace(line) && !line.Trim().Contains("Name") && !line.Trim().Contains("SerialNumber") && !line.Trim().Contains("UUID") && !line.Trim().Contains("InstallDate") && !line.Trim().Contains("OSArchitecture"))
+        if (!string.IsNullOrWhiteSpace(line) && !line.Trim().Contains("Name") && !line.Trim().Contains("SerialNumber") && !line.Trim().Contains("UUID") && !line.Trim().Contains("InstallDate") && !line.Trim().Contains("OSArchitecture") && !line.Trim().Contains("Caption"))
         {
             return line.Trim();
         }
